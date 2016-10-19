@@ -651,7 +651,8 @@
     <option_xbone_title_id>1234ABCD</option_xbone_title_id>
   </Options>
   <ConfigConstants>
-    <constants number="4">
+    <constants number="5">
+      <constant name="NO_ITEM">-1</constant>
       <constant name="JUNK">0</constant>
       <constant name="ROCK">1</constant>
       <constant name="PAPER">2</constant>

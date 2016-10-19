@@ -29,6 +29,7 @@
 grid_posx = -1;
 grid_posy = -1;
 obj_detected = false;
+item_type = -1;
 </string>
           </argument>
         </arguments>
@@ -82,23 +83,38 @@ obj_detected = false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///select current object or swap objects
+            <string>///swap objects if possible
 obj_detected = true;
 if (obj_gameboard.current_item == self) {
     obj_gameboard.current_item = noone;
     image_blend = c_white;
 } else if (obj_gameboard.current_item != self &amp;&amp; obj_gameboard.current_item != noone) {
-    show_debug_message("trying to swap");
-    var newx = x;
-    var newy = y;
-    x = obj_gameboard.current_item.x;
-    y = obj_gameboard.current_item.y;
-    obj_gameboard.current_item.x = newx;
-    obj_gameboard.current_item.y = newy;
-    obj_gameboard.current_item.image_blend = c_white;
-    obj_gameboard.current_item = noone;    
-    image_blend = c_white;
-
+    var xdiff = abs(obj_gameboard.current_item.grid_posx - grid_posx);
+    var ydiff = abs(obj_gameboard.current_item.grid_posy - grid_posy);
+    show_debug_message("xdiff " + string(xdiff) + " ydiff " + string(ydiff));
+    if ((xdiff == 1 || ydiff == 1) &amp;&amp; xdiff != ydiff) {
+        show_debug_message("trying to swap");
+        var newx = x;
+        var newy = y;
+        var gridx = grid_posx;
+        var gridy = grid_posy;
+        var gridtype = item_type;
+        x = obj_gameboard.current_item.x;
+        y = obj_gameboard.current_item.y;
+        grid_posx = obj_gameboard.current_item.grid_posx;
+        grid_posy = obj_gameboard.current_item.grid_posy;
+        item_type = obj_gameboard.current_item.item_type;
+        
+        obj_gameboard.current_item.x = newx;
+        obj_gameboard.current_item.y = newy;
+        obj_gameboard.current_item.grid_posx = gridx;
+        obj_gameboard.current_item.grid_posy = gridy;
+        obj_gameboard.current_item.item_type = gridtype;
+        
+        obj_gameboard.current_item.image_blend = c_white;
+        obj_gameboard.current_item = noone;    
+        image_blend = c_white;
+    }
 } 
 </string>
           </argument>

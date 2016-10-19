@@ -58,6 +58,7 @@ for (var i = 0; i &lt; width; i++) {
         }
         new_obj.grid_posx = i;
         new_obj.grid_posy = j;
+        new_obj.item_type = grid[# i, j];
         
     }
 }
