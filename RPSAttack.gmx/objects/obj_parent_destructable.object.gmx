@@ -28,12 +28,44 @@
             <string>///create
 grid_posx = -1;
 grid_posy = -1;
+obj_detected = false;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="0">
+    <event eventtype="6" enumb="56">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///global mouse up to trap non-drags
+
+if (obj_detected == false &amp;&amp; obj_gameboard.current_item != noone) {
+    //we are not on an object, lets release
+    obj_gameboard.current_item.image_blend = c_white;
+    obj_gameboard.current_item = noone;
+}
+
+obj_detected = false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="7">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -51,11 +83,55 @@ grid_posy = -1;
           <argument>
             <kind>1</kind>
             <string>///select current object or swap objects
+obj_detected = true;
+if (obj_gameboard.current_item == self) {
+    obj_gameboard.current_item = noone;
+    image_blend = c_white;
+} else if (obj_gameboard.current_item != self &amp;&amp; obj_gameboard.current_item != noone) {
+    show_debug_message("trying to swap");
+    var newx = x;
+    var newy = y;
+    x = obj_gameboard.current_item.x;
+    y = obj_gameboard.current_item.y;
+    obj_gameboard.current_item.x = newx;
+    obj_gameboard.current_item.y = newy;
+    obj_gameboard.current_item.image_blend = c_white;
+    obj_gameboard.current_item = noone;    
+    image_blend = c_white;
 
-if (obj_gameboard.current_item == noone) {
+} 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//pressed
+
+ show_debug_message("press_event");
+if (obj_gameboard.current_item == self) {
+    obj_gameboard.current_item = noone;
+    image_blend = c_white;
+} else if (obj_gameboard.current_item == noone) {
+    show_debug_message("new item selectd");
     obj_gameboard.current_item = self;
-} else {
-    
+    image_blend = c_purple;
 }
 </string>
           </argument>
