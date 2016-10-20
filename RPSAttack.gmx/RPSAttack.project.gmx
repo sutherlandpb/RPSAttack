@@ -13,6 +13,10 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\scr_sprite_explode.gml</script>
+    <script>scripts\scr_item_beats_item.gml</script>
+  </scripts>
   <objects name="objects">
     <object>objects\obj_rock</object>
     <object>objects\obj_paper</object>
@@ -20,6 +24,7 @@
     <object>objects\obj_parent_destructable</object>
     <object>objects\obj_junk</object>
     <object>objects\obj_gameboard</object>
+    <object>objects\obj_demo_particle</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_one</room>

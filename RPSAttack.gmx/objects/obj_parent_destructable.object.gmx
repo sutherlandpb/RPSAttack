@@ -30,6 +30,98 @@ grid_posx = -1;
 grid_posy = -1;
 obj_detected = false;
 item_type = -1;
+y_motion = 0;
+x_motion = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///destroy
+
+obj_gameboard.grid[grid_posx, grid_posy] = noone;
+
+//Explode variables
+// Changeable Variables
+var max_life = 30;
+var min_life = 10;
+var max_speed = 10;
+var min_speed = 5;
+var max_peice_size = 8;
+var min_peice_size = 8;
+var spin = 5;
+var fade = 0;
+var fade_amt = 0;
+var fade_to_color = 1;
+var end_color = 0;
+var end_color_display = c_white;
+var color_fade_speed = 0;
+var implode = -1;
+
+
+scr_sprite_explode(max_life, min_life, max_speed, min_speed, max_peice_size, min_peice_size, spin, fade, fade_amt, fade_to_color, end_color_display, color_fade_speed, implode);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///step event, check for stuff to destroy
+var next_item = noone;
+var check_x = grid_posx;
+var check_y = grid_posy;
+        
+if (x_motion != 0 || y_motion != 0) {
+    //see if the next item needs killin'
+    check_x += x_motion;
+    check_y += y_motion;
+    show_debug_message("check_x = " + string(check_x) + " check_y = " + string(check_y));
+    //these are now the grid coords for the next item
+    if (obj_gameboard.grid[# check_x, check_y] != noone
+            &amp;&amp; scr_item_beats_item(item_type, obj_gameboard.grid[# check_x, check_y].item_type)) {
+        with (obj_gameboard.grid[# check_x, check_y]) {
+            instance_destroy();            
+        }
+        x_motion = 0;
+        y_motion = 0;
+    }
+    
+} 
+
+
 </string>
           </argument>
         </arguments>
@@ -89,28 +181,35 @@ if (obj_gameboard.current_item == self) {
     obj_gameboard.current_item = noone;
     image_blend = c_white;
 } else if (obj_gameboard.current_item != self &amp;&amp; obj_gameboard.current_item != noone) {
-    var xdiff = abs(obj_gameboard.current_item.grid_posx - grid_posx);
-    var ydiff = abs(obj_gameboard.current_item.grid_posy - grid_posy);
-    show_debug_message("xdiff " + string(xdiff) + " ydiff " + string(ydiff));
-    if ((xdiff == 1 || ydiff == 1) &amp;&amp; xdiff != ydiff) {
-        show_debug_message("trying to swap");
+    var xdiff = obj_gameboard.current_item.grid_posx - grid_posx;
+    var ydiff = obj_gameboard.current_item.grid_posy - grid_posy;
+    if ((abs(xdiff) == 1 || abs(ydiff) == 1) &amp;&amp; abs(xdiff) != abs(ydiff)) {
         var newx = x;
         var newy = y;
         var gridx = grid_posx;
         var gridy = grid_posy;
         var gridtype = item_type;
+        x_motion = xdiff;
+        y_motion = ydiff;
+        //set local object traits
         x = obj_gameboard.current_item.x;
         y = obj_gameboard.current_item.y;
         grid_posx = obj_gameboard.current_item.grid_posx;
         grid_posy = obj_gameboard.current_item.grid_posy;
         item_type = obj_gameboard.current_item.item_type;
         
+        //set selected item traits
         obj_gameboard.current_item.x = newx;
         obj_gameboard.current_item.y = newy;
         obj_gameboard.current_item.grid_posx = gridx;
         obj_gameboard.current_item.grid_posy = gridy;
         obj_gameboard.current_item.item_type = gridtype;
         
+        //update grid data
+        obj_gameboard.grid[# grid_posx, grid_posy] = self;
+        obj_gameboard.grid[# gridx, gridy] = obj_gameboard.current_item;
+         
+        //de-select item
         obj_gameboard.current_item.image_blend = c_white;
         obj_gameboard.current_item = noone;    
         image_blend = c_white;
@@ -140,12 +239,10 @@ if (obj_gameboard.current_item == self) {
             <kind>1</kind>
             <string>//pressed
 
- show_debug_message("press_event");
 if (obj_gameboard.current_item == self) {
     obj_gameboard.current_item = noone;
     image_blend = c_white;
 } else if (obj_gameboard.current_item == noone) {
-    show_debug_message("new item selectd");
     obj_gameboard.current_item = self;
     image_blend = c_purple;
 }

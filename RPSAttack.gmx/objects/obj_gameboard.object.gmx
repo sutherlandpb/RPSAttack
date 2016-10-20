@@ -32,34 +32,36 @@ current_item = noone;
 
 //set up the grid for the game board
 //set the grid width and height (number of objects)
-var width = 15;
-var height = 15;
+grid_width = 15;
+grid_height = 15;
 var spr_size = 32;
 
 //create grid
-grid = ds_grid_create(width, height);
+grid = ds_grid_create(grid_width, grid_height);
 randomize();
-for (var i = 0; i &lt; width; i++) {
-    for (var j = 0; j &lt; height; j++) {
-        grid[# i, j] = irandom(3);
-        switch grid[# i, j] {
+for (var i = 0; i &lt; grid_width; i++) {
+    for (var j = 0; j &lt; grid_height; j++) {
+        switch irandom(2) + 1 {
             case JUNK:
                 new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_junk);     
+                new_obj.item_type = JUNK;
                 break;
             case ROCK:
                 new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_rock);     
+                new_obj.item_type = ROCK;
                 break;
             case PAPER:
                 new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_paper);     
+                new_obj.item_type = PAPER;
                 break;
             case SCISSORS:
                 new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_scissors);     
+                new_obj.item_type = SCISSORS;
                 break;
         }
         new_obj.grid_posx = i;
         new_obj.grid_posy = j;
-        new_obj.item_type = grid[# i, j];
-        
+        grid[# i, j] = new_obj;
     }
 }
 </string>
