@@ -16,6 +16,7 @@
   <scripts name="scripts">
     <script>scripts\scr_sprite_explode.gml</script>
     <script>scripts\scr_item_beats_item.gml</script>
+    <script>scripts\scr_get_name.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_rock</object>

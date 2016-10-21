@@ -28,16 +28,18 @@
             <string>///create
 
 current_item = noone;
+has_moved = false;
+has_killed = false;
 
 
-//set up the grid for the game board
 //set the grid width and height (number of objects)
 grid_width = 15;
 grid_height = 15;
-var spr_size = 32;
+spr_size = 32;
+max_y = spr_size * (grid_height + 1);
 
-//create grid
-grid = ds_grid_create(grid_width, grid_height);
+
+
 randomize();
 for (var i = 0; i &lt; grid_width; i++) {
     for (var j = 0; j &lt; grid_height; j++) {
@@ -58,10 +60,7 @@ for (var i = 0; i &lt; grid_width; i++) {
                 new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_scissors);     
                 new_obj.item_type = SCISSORS;
                 break;
-        }
-        new_obj.grid_posx = i;
-        new_obj.grid_posy = j;
-        grid[# i, j] = new_obj;
+        }        
     }
 }
 </string>

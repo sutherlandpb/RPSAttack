@@ -8,5 +8,6 @@ if (type == ROCK && beats_type == SCISSORS) {
     return true;
 } else if (type == SCISSORS && beats_type == PAPER) {
     return true;
-} 
-return false;
+} else {
+    return false;
+}
