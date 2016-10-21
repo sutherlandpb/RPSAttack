@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>///create
+destroying = false;
 obj_detected = false;
 item_type = -1;
 
@@ -52,7 +53,10 @@ item_type = -1;
           <argument>
             <kind>1</kind>
             <string>///destroy
-
+if (destroying) {
+    exit;
+}
+destroying = true;
 //Explode variables
 // Changeable Variables
 var max_life = 30;
@@ -72,6 +76,40 @@ var implode = -1;
 
 
 scr_sprite_explode(max_life, min_life, max_speed, min_speed, max_peice_size, min_peice_size, spin, fade, fade_amt, fade_to_color, end_color_display, color_fade_speed, implode);
+
+//if we die while adjacent to junk, kill that too
+
+var obj_to_up = instance_place(x, y - obj_gameboard.spr_size, obj_junk);  
+var obj_to_left = instance_place(x - obj_gameboard.spr_size, y, obj_junk);  
+var obj_to_right = instance_place(x + obj_gameboard.spr_size, y, obj_junk);  
+var obj_to_down = instance_place(x, y + obj_gameboard.spr_size, obj_junk);  
+
+if (obj_to_up != noone) {
+    with(obj_to_up) {
+        instance_destroy();
+    }
+}
+
+if (obj_to_left != noone) {
+    with(obj_to_left) {
+        instance_destroy();
+    }
+}
+
+if (obj_to_right != noone) {
+    with(obj_to_right) {
+        instance_destroy();
+    }
+}
+
+if (obj_to_down != noone) {
+    with(obj_to_down) {
+        instance_destroy();
+    }
+}
+obj_gameboard.has_changed = true;
+
+
 </string>
           </argument>
         </arguments>
@@ -130,9 +168,8 @@ if (obj_to_test == noone &amp;&amp; obj_gameboard.max_y &gt;= y + obj_gameboard.
 
 var obj_to_test = instance_place(x, y + obj_gameboard.spr_size, obj_parent_destructable);        
 if (obj_to_test != noone &amp;&amp; obj_to_test != self) {
-    show_debug_message(scr_get_name(item_type) + " vs " + scr_get_name(obj_to_test.item_type));    
+//    show_debug_message(scr_get_name(item_type) + " vs " + scr_get_name(obj_to_test.item_type));    
     var should_kill = scr_item_beats_item(item_type, obj_to_test.item_type);
-    show_debug_message(string(should_kill));
     if (should_kill) {
         with(obj_to_test) {
             instance_destroy();
@@ -173,7 +210,7 @@ if (alarm[0] == -1 &amp;&amp; obj_gameboard.has_moved) {
     alarm[0] = 5;    
 }
 
-if (alarm[1] == -1 &amp;&amp; obj_gameboard.has_killed) {
+if (alarm[1] == -1 &amp;&amp; (obj_gameboard.has_killed || obj_gameboard.has_moved)) {
     alarm[1] = 5;    
 }
 
@@ -238,14 +275,10 @@ obj_detected = true;
 if (obj_gameboard.current_item == self) {
     obj_gameboard.current_item = noone;
     var obj_to_test = instance_place(x, y + obj_gameboard.spr_size, obj_parent_destructable);        
-    if (obj_to_test != noone &amp;&amp; obj_to_test != self) {
-        show_debug_message(scr_get_name(item_type) + " vs " + scr_get_name(obj_to_test.item_type));    
-    }
     image_blend = c_white;
 } else if (obj_gameboard.current_item != self &amp;&amp; obj_gameboard.current_item != noone) {
     var xdiff = x - obj_gameboard.current_item.x;
     var ydiff = y - obj_gameboard.current_item.y;
-    show_debug_message("xdiff: " + string(xdiff) + " ydiff: " + string(ydiff));
     if ((abs(xdiff) == obj_gameboard.spr_size || abs(ydiff) == obj_gameboard.spr_size) &amp;&amp; abs(xdiff) != abs(ydiff)) {
         var newx = x;
         var newy = y;
@@ -320,7 +353,7 @@ if (obj_gameboard.current_item == self) {
             <string>///draw
 draw_self();
 //draw_text(x - 16,y -16,string(x));
-draw_text(x - 16,y,string(y));
+//draw_text(x - 16,y,string(y));
 </string>
           </argument>
         </arguments>

@@ -7,6 +7,7 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_paper</sprite>
+    <sprite>sprites\spr_spawn_box</sprite>
     <sprite>sprites\spr_junk</sprite>
     <sprite>sprites\spr_rock</sprite>
     <sprite>sprites\spr_scissors</sprite>
@@ -26,6 +27,7 @@
     <object>objects\obj_junk</object>
     <object>objects\obj_gameboard</object>
     <object>objects\obj_demo_particle</object>
+    <object>objects\obj_spawn_box</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_one</room>
