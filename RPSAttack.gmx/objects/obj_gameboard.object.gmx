@@ -33,6 +33,14 @@ has_killed = false;
 has_changed = false;
 spawning = false;
 
+//scores
+p_junk_broken = 0;
+r_junk_broken = 0;
+s_junk_broken = 0;
+r_broken = 0;
+p_broken = 0;
+s_broken = 0;
+
 //set the grid width and height (number of objects)
 grid_width = 15;
 grid_height = 15;
@@ -46,7 +54,11 @@ for (var b = spr_size * 2; b &lt;= spr_size * (grid_width + 1); b+= spr_size) {
 randomize();
 for (var i = 0; i &lt; grid_width; i++) {
     for (var j = 0; j &lt; grid_height; j++) {
-        switch irandom(6) {
+        switch irandom(5) + 1 {
+            case JUNK:
+                new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_junk);     
+                new_obj.item_type = JUNK;
+                break;    
             case ROCK:
                 new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_rock);     
                 new_obj.item_type = ROCK;
@@ -59,11 +71,18 @@ for (var i = 0; i &lt; grid_width; i++) {
                 new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_scissors);     
                 new_obj.item_type = SCISSORS;
                 break;
-            default: 
-            case JUNK:
-                new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_junk);     
-                new_obj.item_type = JUNK;
-                break;    
+            case ROCK_JUNK:
+                new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_r_junk);     
+                new_obj.item_type = ROCK_JUNK;
+                break;
+            case PAPER_JUNK:
+                new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_p_junk);     
+                new_obj.item_type = PAPER_JUNK;
+                break;
+            case SCISSORS_JUNK:
+                new_obj = instance_create(2 * spr_size + i * spr_size, 2 * spr_size + j * spr_size, obj_s_junk);     
+                new_obj.item_type = SCISSORS_JUNK;
+                break;
         }        
     }
 }
@@ -117,6 +136,30 @@ obj_gameboard.has_moved = false;
 if (alarm[0] == -1) {
     alarm[0] = 60;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///draw gui
+
 </string>
           </argument>
         </arguments>

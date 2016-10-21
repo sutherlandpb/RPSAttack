@@ -651,12 +651,15 @@
     <option_xbone_title_id>1234ABCD</option_xbone_title_id>
   </Options>
   <ConfigConstants>
-    <constants number="5">
+    <constants number="8">
       <constant name="NO_ITEM">-1</constant>
       <constant name="JUNK">0</constant>
       <constant name="ROCK">1</constant>
       <constant name="PAPER">2</constant>
       <constant name="SCISSORS">3</constant>
+      <constant name="ROCK_JUNK">4</constant>
+      <constant name="PAPER_JUNK">5</constant>
+      <constant name="SCISSORS_JUNK">6</constant>
     </constants>
   </ConfigConstants>
 </Config>

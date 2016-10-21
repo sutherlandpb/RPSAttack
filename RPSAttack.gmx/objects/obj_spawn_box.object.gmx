@@ -62,8 +62,12 @@ var obj_to_test = instance_place(checkx, checky, obj_parent_destructable);
 if (obj_to_test == noone) {    
     spawned_any = true;
     obj_gameboard.has_moved = spawned_any;
-    var to_spawn = irandom(6);
+    var to_spawn = irandom(5) + 1;
     switch to_spawn {        
+        case JUNK:
+            new_obj = instance_create(checkx, checky, obj_junk);     
+            new_obj.item_type = JUNK;
+            break;            
         case ROCK:
             new_obj = instance_create(checkx, checky, obj_rock);     
             new_obj.item_type = ROCK;
@@ -76,11 +80,18 @@ if (obj_to_test == noone) {
             new_obj = instance_create(checkx, checky, obj_scissors);     
             new_obj.item_type = SCISSORS;
             break;
-        default: 
-        case JUNK:
-            new_obj = instance_create(checkx, checky, obj_junk);     
-            new_obj.item_type = JUNK;
+        case ROCK_JUNK:
+            new_obj = instance_create(checkx, checky, obj_r_junk);     
+            new_obj.item_type = ROCK_JUNK;
             break;        
+        case PAPER_JUNK:
+            new_obj = instance_create(checkx, checky, obj_p_junk);     
+            new_obj.item_type = PAPER_JUNK;
+            break;        
+        case SCISSORS_JUNK:
+            new_obj = instance_create(checkx, checky, obj_s_junk);     
+            new_obj.item_type = SCISSORS_JUNK;
+            break;
     }        
 }    
 

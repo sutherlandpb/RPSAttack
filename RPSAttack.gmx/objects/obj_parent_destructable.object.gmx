@@ -55,8 +55,10 @@ item_type = -1;
             <string>///destroy
 if (destroying) {
     exit;
+} else {
+    destroying = true;
 }
-destroying = true;
+
 //Explode variables
 // Changeable Variables
 var max_life = 30;
@@ -80,31 +82,39 @@ scr_sprite_explode(max_life, min_life, max_speed, min_speed, max_peice_size, min
 //if we die while adjacent to junk, kill that too
 
 var obj_to_up = instance_place(x, y - obj_gameboard.spr_size, obj_junk);  
-var obj_to_left = instance_place(x - obj_gameboard.spr_size, y, obj_junk);  
-var obj_to_right = instance_place(x + obj_gameboard.spr_size, y, obj_junk);  
-var obj_to_down = instance_place(x, y + obj_gameboard.spr_size, obj_junk);  
 
 if (obj_to_up != noone) {
-    with(obj_to_up) {
-        instance_destroy();
+    if (item_type == obj_to_up.item_type || item_type == obj_to_up.item_type -3) {
+        with(obj_to_up) {
+            instance_destroy();
+        }
     }
 }
+var obj_to_left = instance_place(x - obj_gameboard.spr_size, y, obj_junk);  
 
 if (obj_to_left != noone) {
-    with(obj_to_left) {
-        instance_destroy();
+    if (item_type == obj_to_left.item_type || item_type == obj_to_left.item_type -3) {
+        with(obj_to_left) {
+            instance_destroy();
+        }
     }
 }
+var obj_to_right = instance_place(x + obj_gameboard.spr_size, y, obj_junk);  
 
 if (obj_to_right != noone) {
-    with(obj_to_right) {
-        instance_destroy();
+    if (item_type == obj_to_right.item_type || item_type == obj_to_right.item_type -3) {
+        with(obj_to_right) {
+            instance_destroy();
+        }
     }
 }
+var obj_to_down = instance_place(x, y + obj_gameboard.spr_size, obj_junk);  
 
 if (obj_to_down != noone) {
-    with(obj_to_down) {
-        instance_destroy();
+    if (item_type == obj_to_down.item_type || item_type == obj_to_down.item_type -3) {
+        with(obj_to_down) {
+            instance_destroy();
+        }
     }
 }
 obj_gameboard.has_changed = true;

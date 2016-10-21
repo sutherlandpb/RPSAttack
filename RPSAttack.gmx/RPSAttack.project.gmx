@@ -9,6 +9,9 @@
     <sprite>sprites\spr_paper</sprite>
     <sprite>sprites\spr_spawn_box</sprite>
     <sprite>sprites\spr_junk</sprite>
+    <sprite>sprites\spr_p_junk</sprite>
+    <sprite>sprites\spr_s_junk</sprite>
+    <sprite>sprites\spr_r_junk</sprite>
     <sprite>sprites\spr_rock</sprite>
     <sprite>sprites\spr_scissors</sprite>
   </sprites>
@@ -18,6 +21,7 @@
     <script>scripts\scr_sprite_explode.gml</script>
     <script>scripts\scr_item_beats_item.gml</script>
     <script>scripts\scr_get_name.gml</script>
+    <script>scripts\scr_draw_with_shadow.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\obj_rock</object>
@@ -28,6 +32,9 @@
     <object>objects\obj_gameboard</object>
     <object>objects\obj_demo_particle</object>
     <object>objects\obj_spawn_box</object>
+    <object>objects\obj_p_junk</object>
+    <object>objects\obj_r_junk</object>
+    <object>objects\obj_s_junk</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_one</room>
