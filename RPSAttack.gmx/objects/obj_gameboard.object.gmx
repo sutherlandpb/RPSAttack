@@ -42,7 +42,7 @@ p_broken = 0;
 s_broken = 0;
 
 //set the grid width and height (number of objects)
-grid_width = 15;
+grid_width = 10;
 grid_height = 15;
 spr_size = 32;
 max_y = spr_size * (grid_height + 1);
@@ -159,7 +159,7 @@ if (alarm[0] == -1) {
           <argument>
             <kind>1</kind>
             <string>///draw gui
-var xx = (display_get_gui_width() div 4);
+var xx = (display_get_gui_width() div 4) + spr_size;
 var yy = (display_get_gui_height() div 4) * 3;
 
 draw_set_color(c_ltgray); //Set the color to light gray for our background
