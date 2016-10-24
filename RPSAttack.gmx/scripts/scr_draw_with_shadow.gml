@@ -3,7 +3,7 @@ var xx = argument[0];
 var yy = argument[1];
 var msg = argument[2];
 var offset = 2;
-
+draw_set_font(font_main);
 draw_set_alpha(0.5);
 draw_set_color(c_black);
 draw_text(xx + offset, yy  + offset, msg); 

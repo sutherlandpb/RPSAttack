@@ -28,6 +28,7 @@
             <string>///create
 
 spawning = false;
+
 </string>
           </argument>
         </arguments>
@@ -81,16 +82,31 @@ if (obj_to_test == noone) {
             new_obj.item_type = SCISSORS;
             break;
         case ROCK_JUNK:
-            new_obj = instance_create(checkx, checky, obj_r_junk);     
-            new_obj.item_type = ROCK_JUNK;
+            if (obj_gameboard.disable_r_junk) {
+                spawned_any = false;
+                alarm[0] = 1;
+            } else {
+                new_obj = instance_create(checkx, checky, obj_r_junk);     
+                new_obj.item_type = ROCK_JUNK;
+            }
             break;        
         case PAPER_JUNK:
-            new_obj = instance_create(checkx, checky, obj_p_junk);     
-            new_obj.item_type = PAPER_JUNK;
+            if (obj_gameboard.disable_p_junk) {
+                spawned_any = false;
+                alarm[0] = 1;
+            } else {
+                new_obj = instance_create(checkx, checky, obj_p_junk);     
+                new_obj.item_type = PAPER_JUNK;
+            }
             break;        
         case SCISSORS_JUNK:
-            new_obj = instance_create(checkx, checky, obj_s_junk);     
-            new_obj.item_type = SCISSORS_JUNK;
+            if (obj_gameboard.disable_s_junk) {
+                spawned_any = false;
+                alarm[0] = 1;
+            } else {
+                new_obj = instance_create(checkx, checky, obj_s_junk);     
+                new_obj.item_type = SCISSORS_JUNK;
+            }
             break;
     }        
 }    

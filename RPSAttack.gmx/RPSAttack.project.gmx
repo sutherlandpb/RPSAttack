@@ -4,7 +4,10 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_swap</sound>
+    <sound>sound\snd_explode</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_paper</sprite>
     <sprite>sprites\spr_spawn_box</sprite>
@@ -22,19 +25,24 @@
     <script>scripts\scr_item_beats_item.gml</script>
     <script>scripts\scr_get_name.gml</script>
     <script>scripts\scr_draw_with_shadow.gml</script>
+    <script>scripts\scr_level_2.gml</script>
+    <script>scripts\scr_won_level.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\font_main</font>
+  </fonts>
   <objects name="objects">
-    <object>objects\obj_rock</object>
-    <object>objects\obj_paper</object>
-    <object>objects\obj_scissors</object>
-    <object>objects\obj_parent_destructable</object>
-    <object>objects\obj_junk</object>
-    <object>objects\obj_gameboard</object>
     <object>objects\obj_demo_particle</object>
-    <object>objects\obj_spawn_box</object>
+    <object>objects\obj_gameboard</object>
+    <object>objects\obj_junk</object>
     <object>objects\obj_p_junk</object>
+    <object>objects\obj_paper</object>
+    <object>objects\obj_parent_destructable</object>
     <object>objects\obj_r_junk</object>
+    <object>objects\obj_rock</object>
     <object>objects\obj_s_junk</object>
+    <object>objects\obj_scissors</object>
+    <object>objects\obj_spawn_box</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_one</room>

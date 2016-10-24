@@ -78,7 +78,11 @@ var implode = -1;
 
 
 scr_sprite_explode(max_life, min_life, max_speed, min_speed, max_peice_size, min_peice_size, spin, fade, fade_amt, fade_to_color, end_color_display, color_fade_speed, implode);
-
+obj_gameboard.chain_count++;
+//vary the pitch getting higher the bigger your chain
+var pitch = .2 + obj_gameboard.chain_count / 5;
+audio_sound_pitch(snd_explode, min(pitch, 5));
+audio_play_sound(snd_explode, 5, false);
 //if we die while adjacent to junk, kill that too
 
 var obj_to_up = instance_place(x, y - obj_gameboard.spr_size, obj_junk);  
@@ -311,6 +315,11 @@ if (obj_gameboard.current_item == self) {
     var xdiff = x - obj_gameboard.current_item.x;
     var ydiff = y - obj_gameboard.current_item.y;
     if ((abs(xdiff) == obj_gameboard.spr_size || abs(ydiff) == obj_gameboard.spr_size) &amp;&amp; abs(xdiff) != abs(ydiff)) {
+        var pitch = random_range(.8, 2.5);    
+        audio_sound_pitch(snd_swap, pitch);
+        audio_play_sound(snd_swap, 5, false);
+        //we are swapping, so reset the chain count
+        obj_gameboard.chain_count = 0;
         var newx = x;
         var newy = y;
         //set local object traits
