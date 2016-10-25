@@ -8,6 +8,6 @@ Paper beats Rock
 Rock beats Scissors
 Scissors beats Paper
 
-Non-combatant pieces are "junk" junk is destroyed by having a destroy even happen next to it.
+Non-combatant pieces are "junk" junk is destroyed by havinga block of the same color explode next to it.
 
 Pieces at rest do not destroy other pieces, only a swap toward a weak piece can trigger destruction.
