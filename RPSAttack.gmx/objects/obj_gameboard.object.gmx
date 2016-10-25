@@ -38,24 +38,48 @@ chain_count = 0;
 
 
 //Marquee 
+show_debug_message("changing to yellow goal");
 level_goal = "Destroy all of the Yellow bricks...";
 start_letter = 0;
 marquee_length = 15;
 type_rate = 3/room_speed; // 3 char per second
 marquee_scrolling = true;
 
-//scores
-p_junk_broken = 0;
-r_junk_broken = 0;
-s_junk_broken = 0;
-r_broken = 0;
-p_broken = 0;
-s_broken = 0;
+//choose the level
+switch (obj_player_score.level) {
+    case 1:
+        scr_level_1();
+        break;
+    case 2:
+        scr_level_2();
+        break;
+    case 3:
+        scr_level_3();
+        break;
+    case 4:
+        scr_level_4();
+        break;
+    case 5:
+        scr_level_5();
+        break;
+    case 6:
+        scr_level_6();
+        break;
+    case 7:
+        scr_level_7();
+        break;        
+    default:
+        scr_level_endless();
+        break;        
+}
+
+
+
 
 //set the grid width and height (number of objects)
 grid_width = 10;
 grid_height = 15;
-spr_size = 32;
+spr_size = 64;
 max_y = spr_size * (grid_height + 1);
 
 for (var b = spr_size * 2; b &lt;= spr_size * (grid_width + 1); b+= spr_size) {
@@ -119,7 +143,7 @@ for (var i = 0; i &lt; grid_width; i++) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// reset the changed variable
+            <string>/// reset the changed variable
 obj_gameboard.has_moved = false;
 </string>
           </argument>
@@ -149,8 +173,11 @@ if (alarm[0] == -1) {
 }
 
 if (scr_won_level()) {
-    scr_level_2();
+    obj_player_score.level++;
+    room_restart();
 }
+
+
 </string>
           </argument>
         </arguments>
@@ -174,27 +201,30 @@ if (scr_won_level()) {
           <argument>
             <kind>1</kind>
             <string>///draw gui
-var xx = (display_get_gui_width() div 4) + spr_size;
+var xx = (display_get_gui_width() div 4);
 var yy = (display_get_gui_height() div 5) * 4;
 
 draw_set_color(c_ltgray); //Set the color to light gray for our background
-draw_rectangle(spr_size * 2, yy - spr_size, display_get_gui_width() - spr_size * 2, display_get_gui_height() - spr_size * 2, false); //Draw our button
+draw_rectangle(.1*spr_size, yy - spr_size, display_get_gui_width() - spr_size *4
+                , display_get_gui_height() - spr_size, false);
 
 
-scr_draw_with_shadow(xx, yy - spr_size/2, string(r_junk_broken));
+scr_draw_with_shadow(xx, yy - spr_size/2, string(obj_player_score.r_junk_broken));
 draw_sprite_ext(spr_r_junk, 0, xx - spr_size, yy, 1, 1, 0, c_white, 1);
-scr_draw_with_shadow(xx, yy + spr_size/2, string(p_junk_broken));
+scr_draw_with_shadow(xx, yy + spr_size/2, string(obj_player_score.p_junk_broken));
 draw_sprite_ext(spr_p_junk, 0, xx - spr_size, yy  + spr_size, 1, 1, 0, c_white, 1);
-scr_draw_with_shadow(xx, yy + spr_size * 1.5, string(s_junk_broken));
+scr_draw_with_shadow(xx, yy + spr_size * 1.5, string(obj_player_score.s_junk_broken));
 draw_sprite_ext(spr_s_junk, 0, xx - spr_size, yy  + spr_size *2, 1, 1, 0, c_white, 1);
 
 
-scr_draw_with_shadow(xx*2, yy - spr_size/2, string(r_broken));
-draw_sprite_ext(spr_rock, 0, xx*2 - spr_size, yy, 1, 1, 0, c_white, 1);
-scr_draw_with_shadow(xx*2, yy + spr_size/2, string(p_broken));
-draw_sprite_ext(spr_paper, 0, xx*2 - spr_size, yy + spr_size, 1, 1, 0, c_white, 1);
-scr_draw_with_shadow(xx*2, yy + spr_size*1.5, string(s_broken));
-draw_sprite_ext(spr_scissors, 0, xx*2 - spr_size, yy + spr_size *2, 1, 1, 0, c_white, 1);
+scr_draw_with_shadow(xx*2, yy - spr_size/2, string(obj_player_score.level));
+draw_sprite_ext(spr_junk, 0, xx*2 - spr_size, yy, 1, 1, 0, c_white, 1);
+scr_draw_with_shadow(xx*2, yy + spr_size/2, string(obj_player_score.level));
+draw_sprite_ext(spr_junk, 0, xx*2 - spr_size, yy + spr_size, 1, 1, 0, c_white, 1);
+scr_draw_with_shadow(xx*2, yy + spr_size*1.5, string(obj_player_score.level));
+draw_sprite_ext(spr_junk, 0, xx*2 - spr_size, yy + spr_size *2, 1, 1, 0, c_white, 1);
+
+
 
 if (marquee_scrolling){
     var str_to_display = string_copy(level_goal, start_letter, ceil(start_letter + marquee_length));

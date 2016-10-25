@@ -17,6 +17,11 @@ if (obj_gameboard.disable_s_junk) {
     }
 }
 
+if (obj_player_score.level > 7) {
+//endless
+    won = false;
+}
+
 return won;
 
 

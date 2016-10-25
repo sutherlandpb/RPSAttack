@@ -21,11 +21,18 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\scr_sprite_explode.gml</script>
-    <script>scripts\scr_item_beats_item.gml</script>
-    <script>scripts\scr_get_name.gml</script>
     <script>scripts\scr_draw_with_shadow.gml</script>
+    <script>scripts\scr_get_name.gml</script>
+    <script>scripts\scr_item_beats_item.gml</script>
+    <script>scripts\scr_level_1.gml</script>
     <script>scripts\scr_level_2.gml</script>
+    <script>scripts\scr_level_3.gml</script>
+    <script>scripts\scr_level_4.gml</script>
+    <script>scripts\scr_level_5.gml</script>
+    <script>scripts\scr_level_6.gml</script>
+    <script>scripts\scr_level_7.gml</script>
+    <script>scripts\scr_level_endless.gml</script>
+    <script>scripts\scr_sprite_explode.gml</script>
     <script>scripts\scr_won_level.gml</script>
   </scripts>
   <fonts name="fonts">
@@ -43,6 +50,7 @@
     <object>objects\obj_s_junk</object>
     <object>objects\obj_scissors</object>
     <object>objects\obj_spawn_box</object>
+    <object>objects\obj_player_score</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_one</room>

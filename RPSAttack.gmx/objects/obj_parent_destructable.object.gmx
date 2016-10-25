@@ -125,22 +125,22 @@ if (obj_to_down != noone) {
 
 switch item_type {
     case ROCK:
-        obj_gameboard.r_broken++;
+        obj_player_score.r_broken++;
         break;
     case PAPER:
-        obj_gameboard.p_broken++;
+        obj_player_score.p_broken++;
         break;
     case SCISSORS:
-        obj_gameboard.s_broken++;
+        obj_player_score.s_broken++;
         break;
     case ROCK_JUNK:
-        obj_gameboard.r_junk_broken++;
+        obj_player_score.r_junk_broken++;
         break;
     case PAPER_JUNK:
-        obj_gameboard.p_junk_broken++;
+        obj_player_score.p_junk_broken++;
         break;
     case SCISSORS_JUNK:
-        obj_gameboard.s_junk_broken++;
+        obj_player_score.s_junk_broken++;
         break;
 }   
 
