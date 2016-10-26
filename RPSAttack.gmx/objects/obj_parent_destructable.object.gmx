@@ -29,6 +29,7 @@
 destroying = false;
 obj_detected = false;
 item_type = -1;
+image_speed = 0;
 
 </string>
           </argument>
