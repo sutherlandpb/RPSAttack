@@ -9,10 +9,10 @@
     <sound>sound\snd_explode</sound>
   </sounds>
   <sprites name="sprites">
-    <sprite>sprites\spr_paper</sprite>
     <sprite>sprites\spr_spawn_box</sprite>
     <sprite>sprites\spr_junk</sprite>
     <sprite>sprites\spr_p_junk</sprite>
+    <sprite>sprites\spr_paper</sprite>
     <sprite>sprites\spr_s_junk</sprite>
     <sprite>sprites\spr_r_junk</sprite>
     <sprite>sprites\spr_rock</sprite>
